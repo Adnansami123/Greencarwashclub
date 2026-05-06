@@ -1,0 +1,15 @@
+Contract: 
+{
+  contractXID: 
+  IsActive: True,
+  IsRenewal: true (Default)
+  RenewalEndDate: Date
+}
+ContractRenwal
+{
+   ContractStart: OldStartDate,
+   ContractEndDate: OldEndDate,
+   RewenalType: Id,
+   Remarks: Remarks
+
+}

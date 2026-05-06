@@ -1,0 +1,276 @@
+import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useCompany_GetCompanySetupByIDMutation } from "../../store/ConfigurationAPI/ConfigurationAPI";
+import {
+    Row,
+    Col,
+    Card,
+    Radio,
+    Table,
+    Upload,
+    message,
+    Progress,
+    Button,
+    Avatar,
+    Typography,
+    useState,
+    useEffect,
+    useAddCommonCompanyMutation,
+    useGetCompaniesMutation,
+    useGetCompanyByIDMutation,
+    usePutCompanyMutation,
+    ConfirmationModal,
+    DeleteConfirmationModal,
+    AuthContext,
+} from "../index";
+import {
+    DownloadOutlined, PlusCircleOutlined,
+    FormOutlined,
+    DeleteOutlined
+} from '@ant-design/icons';
+import Strings from "../../utils/Strings";
+import { setLoadingModalConfiguration } from "../../store/Slices/ModalLoaderSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetPayoutRequestMutation } from "../../store/PayoutAPI/PayoutRequestAPI";
+import { useContext } from "react";
+
+export default function PayoutRequest(props) {
+
+
+
+
+    const authCtx = useContext(AuthContext);
+
+
+    const history = useHistory();
+
+    const dispatch = useDispatch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPageSize, setCurrentPageSize] = useState(10);
+    const [project, setProject] = useState({});
+    const [data, setData] = useState([]);
+    const [assetByIDData, setAssetByIDData] = useState([]);
+    const [showActionMessage, setshowActionMessage] = useState(false);
+    const [transactionType, setTransactionType] = useState("");
+    const [dataproject, setDataProject] = useState({});
+
+    const initialStates = {
+        ViewTitle: "",
+        AddButton: "",
+        AddTitle: "",
+        EditTitle: "",
+        formURLView: "",
+        formURLAdd: "",
+        formURLEdit: "",
+    }
+
+    const [initialState, setInitialState] = useState(initialStates);
+    const [states, setStates] = useState(initialStates);
+
+    const location = useLocation();
+    const URLPathName = useLocation().pathname.replace("/", "");
+
+
+
+    const [
+        fetch,
+        {
+            data: getFetchData,
+            isSuccess: isFetchDataSuccess,
+        },
+    ] = useGetPayoutRequestMutation();
+
+    useEffect(() => {
+        if (showActionMessage) {
+            setTimeout(function () {
+
+                setshowActionMessage(false);
+                dispatch(setLoadingModalConfiguration({ isVisible: true }));
+                fetch({
+                    id: authCtx.clientID, // this is from state...
+                });
+            }, 2000);
+
+        }
+
+    }, [showActionMessage])
+
+
+
+    useEffect(() => {
+        if (getFetchData?.length > 0) {
+            dispatch(setLoadingModalConfiguration({ isVisible: false }));
+            setData(getFetchData);
+        }
+        else {
+            dispatch(setLoadingModalConfiguration({ isVisible: false }));
+        }
+
+    }, [getFetchData]);
+
+    useEffect(
+        function Assets() {
+            dispatch(setLoadingModalConfiguration({ isVisible: true }));
+            fetch({
+
+                id: authCtx.clientID,
+            });
+
+        }, [fetch]);
+
+
+
+    const [deleteID, setDeleteID] = useState();
+
+   
+
+  
+
+    const onDeleteConfirm = async () => {
+
+        setShowDelete(false);
+       
+    }
+    const onClickDelete = (e) => {
+        //alert(JSON.stringify(e));
+        setShowDelete(true);
+        setDeleteID(e.key);
+        // deleteAssetByID({
+        //     id: e.key,
+        // });
+    }
+
+    const onClickEdit = (e) => {
+
+        // history.push("EditCompanyOffice", {
+        //     Pid: e.key
+        // });
+
+    }
+
+    const onClickNext = () => {
+        history.push("CompanyTeam")
+    }
+    const columns = [
+        {
+            title: "Sl. No.",
+            render: (_, records, index) => (
+                <>
+                    {currentPage === 1 ? index + 1 : (currentPageSize * (currentPage - 1) + index + 1)}
+                </>
+            )
+        },
+        {
+            title: "Action",
+            key: "edit",
+            render: (_, records, index) => (
+                <>
+                    <Button icon={<FormOutlined />} onClick={() => onClickEdit({ key: records.pid })}></Button>
+                    <Button icon={<DeleteOutlined />} onClick={() => onClickDelete({ key: records.pid })}></Button>
+                </>
+            )
+
+        },
+        {
+            title: "Payout Amount",
+            dataIndex: "payoutAmount",
+            key: "payoutAmount",
+        },
+        {
+            title: "Payout Request Date",
+            dataIndex: "payoutRequestDate",
+            key: "payoutRequestDate",
+        },
+        {
+            title: "Payout Request Date",
+            dataIndex: "userRemarks",
+            key: "userRemarks",
+        },
+
+        {
+            title: "Status",
+            dataIndex: "statusXid",
+            key: "statusXid",
+        },
+        {
+            title: "Created On",
+            key: "createdOn",
+            dataIndex: "createdOn",
+        },
+
+
+    ];
+
+    const [addAssetFlag, setAddAssetFlag] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
+    console.log(addAssetFlag);
+    const onClickAdd = () => {
+        history.push("AddPayoutRequest");
+        // setAssetByIDData({});
+        // setAddAssetFlag(true);
+    }
+
+
+    const onChangePageChange = (e) => {
+        setCurrentPage(e.current);
+        setCurrentPageSize(e.pageSize);
+    }
+
+
+    return (
+        <>
+            <div className="tabled">
+                <Row gutter={[24, 0]}>
+                    <Col xs="24" xl={24}>
+                        <Card
+                            bordered={false}
+                            className="criclebox tablespace mb-24"
+                            title="Payout Request"
+                            extra={
+                                <>
+                                    {/* <Radio.Group defaultValue="a">
+                                        <Radio.Button value="a">All</Radio.Button>
+                                        <Radio.Button value="b">ONLINE</Radio.Button>
+                                    </Radio.Group> */}
+
+                                    <Button type="Primary" icon={<PlusCircleOutlined />} onClick={onClickAdd}>
+                                        Add Payout Request
+                                    </Button>
+                                </>
+
+                            }
+                        >
+                            <div className="table-responsive">
+                                <Table
+                                    columns={columns}
+                                    dataSource={!!data ? data : null}
+                                    // pagination={false}
+                                    className="ant-border-space"
+                                    rowKey={(record) => record.pid}
+                                    onChange={((e) => onChangePageChange(e))}
+                                    currentPage={currentPage}
+                                />
+                            </div>
+                        </Card>
+                    </Col>
+                </Row>
+
+                {showDelete && (<DeleteConfirmationModal
+                    onClickDeleteButton={onDeleteConfirm}
+                    onCancel={() => setShowDelete(false)}
+                    item={assetByIDData}
+                ></DeleteConfirmationModal>)
+                }
+                {showActionMessage && (<ConfirmationModal
+                    onClickDeleteButton={onDeleteConfirm}
+                    onCancel={() => setShowDelete(false)}
+                    transactionType={transactionType}
+                    item={assetByIDData}
+                ></ConfirmationModal>)
+                }
+
+            </div>
+
+        </>
+    );
+
+}

@@ -1,0 +1,37 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer circle for text path -->
+  <circle cx="150" cy="150" r="145" fill="none" stroke="#f0f0f0" stroke-width="1" opacity="0.5"/>
+  
+  <!-- The profile icon image (replicated) -->
+  <circle cx="150" cy="150" r="100" fill="url(#gradient)"/>
+  <circle cx="150" cy="120" r="25" fill="none" stroke="white" stroke-width="12"/>
+  <path d="M100,190 C110,160 130,150 150,150 C170,150 190,160 200,190" fill="none" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Gradient to match the original icon -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#2979ff" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Text path for top half -->
+  <path id="topPath" d="M150,40 A110,110 0 0,1 260,150" fill="none"/>
+  
+  <!-- Text path for bottom half -->
+  <path id="bottomPath" d="M260,150 A110,110 0 0,1 150,260" fill="none"/>
+  
+  <!-- Path for left side -->
+  <path id="leftPath" d="M150,260 A110,110 0 0,1 40,150" fill="none"/>
+  
+  <!-- Path for top-left side -->
+  <path id="topLeftPath" d="M40,150 A110,110 0 0,1 150,40" fill="none"/>
+  
+  <!-- Text following the paths -->
+  <text font-family="Arial, sans-serif" font-size="16" fill="#333" font-weight="500">
+    <textPath href="#topPath" startOffset="5%">Login</textPath>
+    <textPath href="#bottomPath" startOffset="5%">Register</textPath>
+    <textPath href="#leftPath" startOffset="5%">Account</textPath>
+    <textPath href="#topLeftPath" startOffset="5%">Profile</textPath>
+  </text>
+</svg>

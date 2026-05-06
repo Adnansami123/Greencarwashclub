@@ -1,0 +1,118 @@
+{
+    "fileName": "a",
+    "sorce": "b",
+    "file": {
+        "file": {
+            "uid": "rc-upload-1680860423751-3"
+        },
+        "fileList": [
+            {
+                "uid": "rc-upload-1680860423751-3",
+                "lastModified": 1680321838660,
+                "lastModifiedDate": "2023-04-01T04:03:58.660Z",
+                "name": "MEW.jpg",
+                "size": 66355,
+                "type": "image/jpeg",
+                "percent": 0,
+                "originFileObj": {
+                    "uid": "rc-upload-1680860423751-3"
+                }
+            }
+        ]
+    }
+}
+
+
+[
+    {
+        "pid": 1073,
+        "assetName": "Fire Alaram",
+        "assetTypeName": null,
+        "subAssetTypeName": null,
+        "barcode": "",
+        "photo": "",
+        "createdOn": "31-03-2023 11:56:35",
+        "lastEdit": "31-03--2023 11:56 AM",
+        "lastEditByXid": 9999,
+        "modifiedBy": null,
+        "assetImages": []
+    },
+    {
+        "pid": 1074,
+        "assetName": "FIRE EXTINGUISHER",
+        "assetTypeName": null,
+        "subAssetTypeName": null,
+        "barcode": "",
+        "photo": "",
+        "createdOn": "31-03-2023 12:03:01",
+        "lastEdit": "31-03--2023 12:03 PM",
+        "lastEditByXid": 9999,
+        "modifiedBy": null,
+        "assetImages": []
+    },
+    {
+        "pid": 1075,
+        "assetName": "FIRE PUMP",
+        "assetTypeName": null,
+        "subAssetTypeName": null,
+        "barcode": "",
+        "photo": "",
+        "createdOn": "31-03-2023 12:04:37",
+        "lastEdit": "31-03--2023 12:04 PM",
+        "lastEditByXid": 9999,
+        "modifiedBy": null,
+        "assetImages": []
+    },
+    {
+        "pid": 2077,
+        "assetName": "new with images",
+        "assetTypeName": null,
+        "subAssetTypeName": null,
+        "barcode": "",
+        "photo": "",
+        "createdOn": "06-04-2023 17:04:54",
+        "lastEdit": "06-04--2023 5:04 PM",
+        "lastEditByXid": 9999,
+        "modifiedBy": null,
+        "assetImages": [
+            {
+                "pid": 2053,
+                "assetXid": 2077,
+                "assets": {
+                    "pid": 2077,
+                    "assetName": "new with images",
+                    "barCode": "",
+                    "photo": "",
+                    "companyXid": 7,
+                    "companies": {
+                        "pid": 7,
+                        "nameEng": "CalibreCue IT Solutions",
+                        "nameAra": "CalibreCue IT Solutions",
+                        "address": null,
+                        "webSite": null,
+                        "countryXid": 3,
+                        "countries": null,
+                        "createdOn": "2023-03-31T11:45:07.94",
+                        "lastEdit": "2023-03-31T11:45:07.94",
+                        "lastEditByXid": 9999,
+                        "modifiedBy": null
+                    },
+                    "createdOn": "2023-04-06T17:04:54.7233333",
+                    "lastEdit": "2023-04-06T17:04:54.7233333",
+                    "lastEditByXid": 9999,
+                    "modifiedBy": null,
+                    "assetImages": []
+                },
+                "typeOfDoc": "string",
+                "savedName": "string",
+                "originalName": "string",
+                "imagePath": "string",
+                "docExtension": "string",
+                "createdOn": "2023-04-06T17:04:55.0133333",
+                "lastEdit": "2023-04-06T17:04:55.0133333",
+                "lastEditByXid": 9999,
+                "modifiedBy": null
+            }
+        ]
+    }
+]

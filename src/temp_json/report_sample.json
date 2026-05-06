@@ -1,0 +1,50 @@
+{
+    "ClientCount": "2",
+    "ContractCount": "10",
+    "client PID": 3423,
+    "name": "name"{
+        "Contact": [
+            {
+                "Contact_pid": 2,
+                "ContractReferenceNumber": 32423423,
+                "isSubContrat": false,
+                "otherDetails also required": "all",
+                "PPMService": 10,
+                "ConditionalSruvey": 2,
+                "ECO": 3
+            },
+            {
+                "Contact_pid": 3,
+                "ContractReferenceNumber": 32423423343,
+                "isSubContrat": true,
+                "otherDetails also required": "all",
+                "PPMService": 20,
+                "ConditionalSruvey": 10,
+                "ECO": 3
+            }
+        ]
+    },
+    "client PID": 3423,
+    "name": "name"{
+        "Contact": [
+            {
+                "Contact_pid": 2,
+                "ContractReferenceNumber": 32423423,
+                "isSubContrat": false,
+                "otherDetails also required": "all",
+                "PPMService": 10,
+                "ConditionalSruvey": 2,
+                "ECO": 3
+            },
+            {
+                "Contact_pid": 3,
+                "ContractReferenceNumber": 32423423343,
+                "isSubContrat": true,
+                "otherDetails also required": "all",
+                "PPMService": 20,
+                "ConditionalSruvey": 10,
+                "ECO": 3
+            }
+        ]
+    }
+}

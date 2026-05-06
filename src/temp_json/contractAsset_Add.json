@@ -1,0 +1,25 @@
+{
+    "ContractAsset": {
+        "ContractXid": 1021,
+        "AssetXid": "1073",
+        "surveyTypeXid": "2",
+        "contractType": "N"
+    },
+    "ContractAssetDetails": [
+        {
+            "AssetDetailsXid": 1,
+            "AssetName": "test Brand",
+            "AssetValue": "Ass Value"
+        }
+    ],
+    "ContractAssetPPMFrequency": {
+        "PPMFrequencyXid": "5"
+    },
+    "ContractAssetPPMFrequencyTemplate": [
+        {
+            "TemplateXid": "6"
+        }
+    ],
+    "StartDate": "25/04/2023",
+    "EndDate": "27/04/2023"
+}

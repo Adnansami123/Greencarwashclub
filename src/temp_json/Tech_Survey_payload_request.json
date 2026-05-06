@@ -1,0 +1,50 @@
+//for techniican to do survey...
+{
+    "ContractChecklistItemSurveyProcess": [
+        {
+            "PPMFrequencySurveyScheduleXid": 1,
+            "CheckListItemXid": 1,
+            "IsProcessed": true,
+            "Remarks": "string",
+            "LastEditByXid": 3242
+        },
+        {
+            "PPMFrequencySurveyScheduleXid": 1,
+            "CheckListItemXid": 1,
+            "IsProcessed": true,
+            "Remarks": "string",
+            "LastEditByXid": 3242,
+        }
+    ],
+    "ContractAssetReplacement": [
+        {
+           // "ContractAssetSurveyXid":1, (we need to remove and add below)
+           "PPMFrequencySurveyScheduleXid": 1,
+            "Item":"string",
+            "Quantity":3,
+            "Remarks":"string",
+            "LastEditByXid":33
+        },
+        {
+             // "ContractAssetSurveyXid":1, (we need to remove and add below)
+             "PPMFrequencySurveyScheduleXid": 1,
+            "Item":"string",
+            "Quantity":3,
+            "Remarks":"string",
+            "LastEditByXid":33
+        }
+    ],
+    "PPMFrequencySurveySchedule" // this is update only
+    {
+        "Pid": 1,
+        "NoOfHeads": 2,
+        "StatusXid":4,
+        "GeneralRemarks":"string",
+        "StartDateTime":"StartDateTime",
+        "EndDateTime":"EndDateTime",
+
+    }
+}
+
+
+   

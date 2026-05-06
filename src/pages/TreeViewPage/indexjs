@@ -1,0 +1,8 @@
+
+import OrgChartTree from "../../components/TreeView/OrgChartTree";
+
+const TreeViewPage = () => {
+    return <OrgChartTree />;
+};
+
+export default TreeViewPage;
