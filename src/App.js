@@ -210,10 +210,10 @@ const App = () => {
           },
         }}
       >
-        <LoadingModal
+        {/* <LoadingModal
           isVisible={loadingModalCofiguration.isVisible}
           loadingText={loadingModalCofiguration.loadingText}
-        ></LoadingModal>
+        ></LoadingModal> */}
         <div>
           <NewAssetProvider>
             <NewProductProvider>

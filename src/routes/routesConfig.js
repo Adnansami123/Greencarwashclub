@@ -41,6 +41,7 @@ import OrderListPage from "../components/OrderListPage/OrderListPage";
 import Membership from "../components/MyProducts/Membership";
 import Services from "../components/UI/Services";
 import VehicleSales from "../components/Shop/VehicleSales";
+import Subscription from "../components/MyProducts/Subscription";
 
 //import InvoicePage from "../pages/InvoicePage/InvoicePage";
 
@@ -155,11 +156,11 @@ const commonAppRoutes = [
     component: () => <AllProducts />,
     menuText: "All Products",
   },
-  //  {
-  //   path: "/PrivacyPolicy",
-  //   component: () => <PrivacyPolicy />,
-  //   menuText: "PrivacyPolicy",
-  // },
+   {
+    path: "/Subscription",
+    component: () => <Subscription />,
+    menuText: "Subscription",
+  },
   {
     path: "/Shop",
     component: () => <Shop />,

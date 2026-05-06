@@ -20,7 +20,7 @@
   padding: 0 20px;
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 30px;
 }
 
@@ -159,5 +159,33 @@
 
   .footer-col p {
     font-size: 13px;
+  }
+}
+
+/* Branches Grid */
+.branches-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* ✅ 3 columns */
+  gap: 20px;
+}
+
+.branches-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.branches-grid li {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #ffffff;
+}
+.branches h3 {
+  color: #ffffff;
+}
+/* 📱 Mobile Responsive */
+@media (max-width: 768px) {
+  .branches-grid {
+    grid-template-columns: 1fr; /* single column on mobile */
   }
 }

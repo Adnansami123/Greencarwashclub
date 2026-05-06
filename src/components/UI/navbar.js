@@ -377,6 +377,25 @@ export default function Navbar({ onNavClick, setCurrentView }) {
             )}
           </Link>
         </li>
+         <li className="relative group">
+          <Link
+            to="/Subscription"
+            onClick={() =>
+              handleNavigation("/Subscription", "Home > Contact", "contact")
+            }
+            className={`inline-block relative text-black text-decoration-none ${
+              isActive("/Subscription") ? "font-medium" : ""
+            }`}
+          >
+            Subscription
+            {isActive("/Subscription") && (
+              <span className="absolute left-0 -bottom-1 w-full h-[2px]  bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-700 hover:to-purple-700 transition-all duration-300"></span>
+            )}
+            {!isActive("/Subscription") && (
+              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-500 ease-in-out group-hover:w-full"></span>
+            )}
+          </Link>
+        </li>
       </ul>
       {/* Desktop Icons */}
       <div className="hidden lg:flex gap-4 items-center">

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { setLoadingModalConfiguration } from "../store/Slices/ModalLoaderSlice";
-import { useGetGetItemsByAssetCaetgoryAndCompanyBranchV1Mutation } from "../store/eCommerceAPI/eCommerceAPI";
+// import { useGetGetItemsByAssetCaetgoryAndCompanyBranchV1Mutation } from "../store/eCommerceAPI/eCommerceAPI";
 import { useDispatch } from "react-redux";
 
 const CompareContext = createContext();
@@ -14,8 +14,8 @@ const CompareProvider = ({ children }) => {
 
   // Fetch products from API
 
-  const [fetch, { data: getFetchData, isSuccess: isFetchDataSuccess }] =
-    useGetGetItemsByAssetCaetgoryAndCompanyBranchV1Mutation();
+  // const [fetch, { data: getFetchData, isSuccess: isFetchDataSuccess }] =
+  //   useGetGetItemsByAssetCaetgoryAndCompanyBranchV1Mutation();
 
 
   useEffect(
