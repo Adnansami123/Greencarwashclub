@@ -442,8 +442,8 @@ export const CartItem = ({
   };
   const handleSendWhatsApp = (e) => {
     e.stopPropagation();
-    const productLink = `https://app.vijayasarees.com/product/${pid}`; // link with product id
-    const phoneNumber = "919390766350"; // replace with your WhatsApp number
+    const productLink = `https://greencarwashclub.calibrecue.in/product/${pid}`;
+    const phoneNumber = "919989267226"; // replace with your WhatsApp number
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       `Check this product: ${productLink}`,
     )}`;

@@ -65,8 +65,8 @@ export default function VehicleSales({
   const isInCompare = compareItems.some((item) => item.id === pid);
 
   const [products, setProducts] = useState([]);
-const [selectedSizes, setSelectedSizes] = useState([]);
-const [selectedColors, setselectedColors] = useState([]);
+  const [selectedSizes, setSelectedSizes] = useState([]);
+  const [selectedColors, setselectedColors] = useState([]);
 
   // State for search results
   const [displayedProducts, setDisplayedProducts] = useState([]);
@@ -173,21 +173,21 @@ const [selectedColors, setselectedColors] = useState([]);
   }, [products]);
 
   // Add this function to handle color selection
- const handleSizeChange = (size) => {
-  setSelectedSizes((prev) => {
-    if (size === "All Sizes") {
-      return prev.includes("All Sizes") ? [] : ["All Sizes"];
-    } else {
-      const newSizes = prev.filter((s) => s !== "All Sizes");
-
-      if (newSizes.includes(size)) {
-        return newSizes.filter((s) => s !== size);
+  const handleSizeChange = (size) => {
+    setSelectedSizes((prev) => {
+      if (size === "All Sizes") {
+        return prev.includes("All Sizes") ? [] : ["All Sizes"];
       } else {
-        return [...newSizes, size];
+        const newSizes = prev.filter((s) => s !== "All Sizes");
+
+        if (newSizes.includes(size)) {
+          return newSizes.filter((s) => s !== size);
+        } else {
+          return [...newSizes, size];
+        }
       }
-    }
-  });
-};
+    });
+  };
 
   // Pagination handler
   const handlePageChange = (pageNumber) => {
@@ -327,35 +327,34 @@ const [selectedColors, setselectedColors] = useState([]);
   };
 
   // Update this in the filteredProducts calculation
- const filteredProducts = displayedProducts?.filter((product) => {
-  const passesCategory =
-    selectedCategories.length === 0 ||
-    selectedCategories.includes("All Categories") ||
-    selectedCategories.includes(product.nameEng);
+  const filteredProducts = displayedProducts?.filter((product) => {
+    const passesCategory =
+      selectedCategories.length === 0 ||
+      selectedCategories.includes("All Categories") ||
+      selectedCategories.includes(product.nameEng);
 
-  const passesPrice =
-    product.salePrice >= priceRange[0] &&
-    product.salePrice <= priceRange[1];
+    const passesPrice =
+      product.salePrice >= priceRange[0] && product.salePrice <= priceRange[1];
 
-  const passesColor =
-    selectedColors.length === 0 ||
-    selectedColors.includes("All Colors") ||
-    (product.itemSpecification &&
-      product.itemSpecification.some((spec) =>
-        selectedColors.includes(spec.nameEng)
-      ));
+    const passesColor =
+      selectedColors.length === 0 ||
+      selectedColors.includes("All Colors") ||
+      (product.itemSpecification &&
+        product.itemSpecification.some((spec) =>
+          selectedColors.includes(spec.nameEng),
+        ));
 
-  // ✅ FIX: move passesSize here
-  const passesSize =
-    selectedSizes.length === 0 ||
-    selectedSizes.includes("All Sizes") ||
-    (product.itemSpecification &&
-      product.itemSpecification.some((spec) =>
-        selectedSizes.includes(spec.sizeName)
-      ));
+    // ✅ FIX: move passesSize here
+    const passesSize =
+      selectedSizes.length === 0 ||
+      selectedSizes.includes("All Sizes") ||
+      (product.itemSpecification &&
+        product.itemSpecification.some((spec) =>
+          selectedSizes.includes(spec.sizeName),
+        ));
 
-  return passesCategory && passesPrice && passesColor && passesSize;
-});
+    return passesCategory && passesPrice && passesColor && passesSize;
+  });
 
   // Sort the filtered products based on the selected sort option
   const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -379,21 +378,21 @@ const [selectedColors, setselectedColors] = useState([]);
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = sortedProducts.slice(indexOfFirstItem, indexOfLastItem);
 
-const sizes = React.useMemo(() => {
-  if (!products || products.length === 0) return ["All Sizes"];
+  const sizes = React.useMemo(() => {
+    if (!products || products.length === 0) return ["All Sizes"];
 
-  const sizeSet = new Set();
+    const sizeSet = new Set();
 
-  products.forEach((product) => {
-    product?.itemSpecification?.forEach((spec) => {
-      if (spec?.sizeName && spec.sizeName !== "N/A") {
-        sizeSet.add(spec.sizeName);
-      }
+    products.forEach((product) => {
+      product?.itemSpecification?.forEach((spec) => {
+        if (spec?.sizeName && spec.sizeName !== "N/A") {
+          sizeSet.add(spec.sizeName);
+        }
+      });
     });
-  });
 
-  return ["All Colors", ...Array.from(sizeSet)];
-}, [products]);
+    return ["All Colors", ...Array.from(sizeSet)];
+  }, [products]);
 
   // Dynamic image handling for any product
   const getProductImage = (product, isHover = false) => {
@@ -482,8 +481,8 @@ const sizes = React.useMemo(() => {
   }, [displayedProducts]);
   const handleSendWhatsApp = (e) => {
     e.stopPropagation();
-    // const productLink = `https://app.vijayasarees.com/product/${pid}`;
-    const phoneNumber = "919390766350"; // replace with your WhatsApp number
+    const productLink = `https://greencarwashclub.calibrecue.in/product/${pid}`;
+    const phoneNumber = "919989267226"; // replace with your WhatsApp number
     const url = `https://wa.me/${phoneNumber}?text=${
       encodeURIComponent()
       // `Check this product: ${productLink}`,
@@ -606,48 +605,48 @@ const sizes = React.useMemo(() => {
             </div>
 
             {/* Colors */}
-          {/* Sizes */}
-<div className="mb-6">
-  <h3 className="font-medium text-base lg:text-lg mb-3 border-b pb-2 flex justify-between items-center">
-    Colors
-    <ChevronDown size={18} className="text-gray-500" />
-  </h3>
+            {/* Sizes */}
+            <div className="mb-6">
+              <h3 className="font-medium text-base lg:text-lg mb-3 border-b pb-2 flex justify-between items-center">
+                Colors
+                <ChevronDown size={18} className="text-gray-500" />
+              </h3>
 
-  <div className="space-y-2 max-h-40 overflow-y-auto custom-scrollbar px-1">
-    {sizes.map((size, index) => (
-      <div key={index} className="flex items-center">
-        <input
-          type="checkbox"
-          id={`size-${index}`}
-          className="mr-2 h-4 w-4 accent-pink-500 cursor-pointer"
-          checked={selectedSizes.includes(size)}
-          onChange={() => handleSizeChange(size)}
-        />
+              <div className="space-y-2 max-h-40 overflow-y-auto custom-scrollbar px-1">
+                {sizes.map((size, index) => (
+                  <div key={index} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id={`size-${index}`}
+                      className="mr-2 h-4 w-4 accent-pink-500 cursor-pointer"
+                      checked={selectedSizes.includes(size)}
+                      onChange={() => handleSizeChange(size)}
+                    />
 
-        <label
-          htmlFor={`size-${index}`}
-          className="text-gray-700 hover:text-pink-500 cursor-pointer flex-1 text-sm"
-        >
-          {size}
-        </label>
+                    <label
+                      htmlFor={`size-${index}`}
+                      className="text-gray-700 hover:text-pink-500 cursor-pointer flex-1 text-sm"
+                    >
+                      {size}
+                    </label>
 
-        <span className="text-gray-400 text-xs">
-          (
-          {size === "All Colors"
-            ? products.length
-            : products.filter(
-                (p) =>
-                  p.itemSpecification &&
-                  p.itemSpecification.some(
-                    (spec) => spec.sizeName === size
-                  )
-              ).length}
-          )
-        </span>
-      </div>
-    ))}
-  </div>
-</div>
+                    <span className="text-gray-400 text-xs">
+                      (
+                      {size === "All Colors"
+                        ? products.length
+                        : products.filter(
+                            (p) =>
+                              p.itemSpecification &&
+                              p.itemSpecification.some(
+                                (spec) => spec.sizeName === size,
+                              ),
+                          ).length}
+                      )
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Main Content */}
@@ -669,7 +668,8 @@ const sizes = React.useMemo(() => {
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
-Cars Collection                </h2>
+                  Cars Collection{" "}
+                </h2>
                 <style jsx>{`
                   @keyframes gradient-shift {
                     0% {
@@ -684,9 +684,7 @@ Cars Collection                </h2>
                   }
                 `}</style>
 
-                <p className="text-xs sm:text-sm font-semibold drop-shadow-md mb-3 sm:mb-4 hover:text-purple-600 hover:scale-110 transition-all duration-500 ease-in-out tracking-wide">
-               
-                </p>
+                <p className="text-xs sm:text-sm font-semibold drop-shadow-md mb-3 sm:mb-4 hover:text-purple-600 hover:scale-110 transition-all duration-500 ease-in-out tracking-wide"></p>
 
                 {/* <div className="flex justify-center mt-4">
   <Button
@@ -849,12 +847,12 @@ Cars Collection                </h2>
                     <div className="absolute inset-0 bg-opacity-20 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end z-20 pointer-events-none">
                       {/* Main Button (Add to Cart) */}
                       <div className="px-2 py-2 sm:py-3 bg-white bg-opacity-90 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col gap-2 relative z-30 pointer-events-auto">
-                          <Button
-                                   onClick={handleSendWhatsApp}
-                                   className="flex-1 !bg-green-500 hover:!bg-green-600 text-white rounded-lg flex items-center justify-center gap-2"
-                                 >
-                                   Contact With <FaWhatsapp />
-                                 </Button>
+                        <Button
+                          onClick={handleSendWhatsApp}
+                          className="flex-1 !bg-green-500 hover:!bg-green-600 text-white rounded-lg flex items-center justify-center gap-2"
+                        >
+                          Contact With <FaWhatsapp />
+                        </Button>
 
                         {/* Quick actions */}
                         <div className="flex justify-center gap-2 sm:gap-3 py-1">
@@ -982,7 +980,7 @@ Cars Collection                </h2>
                     </h3>
 
                     {/* Rating */}
-                    <div
+                    {/* <div
                       className={`flex my-1 sm:my-2 ${
                         view === "list" ? "" : ""
                       }`}
@@ -1004,7 +1002,7 @@ Cars Collection                </h2>
                       <span className="text-xs text-gray-500 ml-1">
                         ({product.rating})
                       </span>
-                    </div>
+                    </div> */}
                     {/* Price */}
                     <div
                       className={`flex items-center gap-1 sm:gap-2 ${
@@ -1026,69 +1024,34 @@ Cars Collection                </h2>
                           {product.description || "No description available."}
                         </p>
                         <div className="flex flex-wrap gap-2">
-                          {!product.availableStock ? (
-                            <button
-                              className="flex-1 py-1.5 sm:py-2 bg-red-600 text-white font-medium rounded-md cursor-not-allowed text-xs sm:text-sm"
-                              disabled
+                          {/* <div className="px-2 py-2 sm:py-3 bg-white bg-opacity-90 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col gap-2 relative z-30 pointer-events-auto">
+                            <Button
+                              onClick={handleSendWhatsApp}
+                              className="flex-1 !bg-green-500 hover:!bg-green-600 text-white rounded-lg flex items-center justify-center gap-2"
                             >
-                              Out of Stock
-                            </button>
-                          ) : (
-                            <button
-                              className="flex-1 py-1.5 sm:py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-md transition-colors text-xs sm:text-sm"
-                              onClick={(e) => handleAddToCart(e, product)}
-                              disabled={product.availableStock <= 0}
-                            >
-                              {product.availableStock > 0
-                                ? "Add to Cart"
-                                : "Out of Stock"}
-                            </button>
-                          )}
-                          <button
-                            onClick={(e) => toggleWishlist(e, product)}
-                            className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full ${
-                              isInWishlist(product.pid)
-                                ? "bg-red-100"
-                                : "bg-white"
-                            } flex items-center justify-center hover:bg-gray-100 transition-colors border border-gray-200`}
-                            title={
-                              isInWishlist(product.pid)
-                                ? "Remove from wishlist"
-                                : "Add to wishlist"
-                            }
-                          >
-                            <img
-                              src={
-                                isInWishlist(product.pid) ? LikeFilled : Like
-                              }
-                              alt="Wishlist"
-                              className="w-4 h-4 sm:w-5 sm:h-5"
-                            />
-                          </button>
-                          {/* <button
-                            className="p-1.5 sm:p-2 border border-gray-300 rounded-md hover:bg-gray-50"
-                            onClick={(e) => openQuickView(e, product)}
-                          >
-                            <Eye size={16} className="text-gray-600" />
-                          </button> */}
-                          {/* Share button */}
-                          <button className="rounded-full bg-white p-2">
-                            <a
-                              href={
-                                "https://web.whatsapp.com/send?text= Referral Link URL " +
-                                `${process.env.REACT_APP_PUblic}` +
-                                product.pid
-                              }
-                              rel="nofollow noopener"
-                              className="share-icon flex items-center"
-                            >
-                              <img
-                                src={Share}
-                                className="w-5 h-5"
-                                alt={Share}
-                              />
-                            </a>
-                          </button>
+                              Contact With <FaWhatsapp />
+                            </Button>
+
+                          </div> */}
+
+                        <button className="rounded-full bg-white p-2">
+  <a
+    href={
+      "https://web.whatsapp.com/send?text=Referral Link URL " +
+      `${process.env.REACT_APP_PUblic}` +
+      product.pid
+    }
+    target="_blank"
+    rel="nofollow noopener noreferrer"
+    className="share-icon flex items-center"
+  >
+    <img
+      src={Share}
+      className="w-5 h-5"
+      alt="share"
+    />
+  </a>
+</button>
                         </div>
                       </div>
                     )}

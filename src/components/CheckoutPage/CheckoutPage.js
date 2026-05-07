@@ -403,7 +403,7 @@ export default function CheckoutPage() {
         Description: item.description || item.itemName,
         SelectedColor: item.selectedColor || "",
         SelectedSize: item.selectedSize || "",
-        ItemSpecficationXID: item.ItemSpecficationXID || 0,
+        ItemSpecficationXID: null,
         UOM: item.UOM,
         QuantityAmount: item.price,
         Quantity: item.quantity,
@@ -1053,8 +1053,8 @@ export default function CheckoutPage() {
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Company Name
-                    <span className="text-gray-400">(Optional)</span>
+                    Vehicle NO:
+                    {/* <span className="text-gray-400">(Optional)</span> */}
                   </label>
                   <input
                     type="text"
@@ -1086,7 +1086,6 @@ export default function CheckoutPage() {
                     required
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white text-black"
                     value={states.country}
-                    onChange={handleInputChange}
                   >
                     {getCountriesData?.map((a) => (
                       <option key={a.pid} value={a.pid}>
@@ -1105,7 +1104,6 @@ export default function CheckoutPage() {
                     required
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white text-black"
                     value={states.state}
-                    onChange={handleInputChange}
                   >
                     <option key={1} value={1}>
                       Others
@@ -1233,20 +1231,20 @@ export default function CheckoutPage() {
                   </span>
                   Payment Method
                 </h3>
-                  <div className="space-y-10 p-1">
-                    <Checkbox
-                      checked={showPaymentImage}
-                      onChange={OnChangeHandlerPayment}
-                    >
-                      Pay Now
-                    </Checkbox>
+                <div className="space-y-10 p-1">
+                  <Checkbox
+                    checked={showPaymentImage}
+                    onChange={OnChangeHandlerPayment}
+                  >
+                    Pay Now
+                  </Checkbox>
 
-                    {showPaymentImage && (
-                      <div className="mt-15 flex justify-center px-2 sm:px-10">
-                        <img
-                          src={RazorpayImage}
-                          alt="Razorpay"
-                          className="
+                  {showPaymentImage && (
+                    <div className="mt-15 flex justify-center px-2 sm:px-10">
+                      <img
+                        src={RazorpayImage}
+                        alt="Razorpay"
+                        className="
         w-full
         max-w-[600px]
         sm:max-w-[300px]
@@ -1260,10 +1258,10 @@ export default function CheckoutPage() {
         transition-all
         duration-300
       "
-                        />
-                      </div>
-                    )}
-                  </div>
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
 
               <button

@@ -160,7 +160,7 @@ export default function CartPage() {
 
                             {/* Display color and size information */}
                             <div className="flex flex-wrap gap-2 mt-2">
-                              {item.selectedColor && (
+                              {/* {item.selectedColor && (
                                 <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
                                   Color: {item.selectedColor}
                                 </span>
@@ -169,12 +169,12 @@ export default function CartPage() {
                                 <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-purple-50 text-purple-700 border border-purple-100">
                                   Size: {item.selectedSize}
                                 </span>
-                              )}
-                              {item.ItemSpecficationXID && (
+                              )} */}
+                              {/* {item.ItemSpecficationXID && (
                                 <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
                                   Color: {item.ItemSpecficationXID}
                                 </span>
-                              )}
+                              )} */}
                             </div>
 
                             <p className="text-sm text-gray-500 mt-1">
@@ -256,7 +256,7 @@ export default function CartPage() {
               {/* Continue Shopping Link */}
               <div className="mt-4 sm:mt-6">
                 <Link
-                  to="/shop"
+                  to="/Subscription"
                   className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition"
                 >
                   <ArrowLeft size={16} />
@@ -278,17 +278,17 @@ export default function CartPage() {
                     <span className="font-medium">₹ {subtotal.toFixed(2)}</span>
                   </div>
 
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <span className="text-gray-600">Tax (5% inclusive)</span>
                     <span className="font-medium">₹ {totalTax.toFixed(2)}</span>
-                  </div>
+                  </div> */}
 
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <span className="text-gray-600">Shipping</span>
                     <span className="font-medium">
                       ₹ {SHIPPING_FEE.toFixed(2)}
                     </span>
-                  </div>
+                  </div> */}
 
                   <div className="border-t border-gray-200 pt-4 flex justify-between items-center">
                     <span className="text-lg font-semibold text-gray-900">
@@ -363,10 +363,10 @@ export default function CartPage() {
               our amazing products and start shopping!
             </p>
             <Link
-              to="/VehicleSales"
+              to="/Subscription"
               className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-sm hover:shadow transition-all"
             >
-              Start Shopping
+             Subscription
             </Link>
           </div>
         )}

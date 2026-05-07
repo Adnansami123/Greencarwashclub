@@ -568,7 +568,7 @@ export default function Navbar({ onNavClick, setCurrentView }) {
       <div className="flex items-center justify-center fixed bottom-5 right-5 z-[1000]">
         <div className="w-[60px] h-[60px] bg-[#25d366] rounded-full shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center">
           <a
-            href="https://wa.me/+919390766350"
+            href="https://wa.me/+919989267226"
             target="_blank"
             rel="noopener noreferrer"
           >

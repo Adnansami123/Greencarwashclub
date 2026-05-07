@@ -127,7 +127,7 @@ export default function ContactPage() {
                   <div className="mt-1 text-sm sm:text-base text-green-00">
                     <div className="flex justify-between">
                       <span>Phone:</span>
-                      <span className="ml-2">+91 93907 66350</span>
+                      <span className="ml-2">+91 9989267226</span>
                       {/* <span className="ml-2">+91 9550502450</span> */}
                     </div>
                     <div className="flex justify-between">
