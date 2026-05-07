@@ -526,7 +526,7 @@ export const CartItem = ({
 };
 export default function Subscription() {
   const dispatch = useDispatch();
-  const { cartCount } = useCart();   
+  const { cartCount } = useCart();
   const [selectedTrend, setSelectedTrend] = useState("All");
   const [productsData, setProductsData] = useState([]);
   console.log("productsData", productsData);
@@ -650,13 +650,11 @@ export default function Subscription() {
 
   return (
     <>
-        
-           
       <div className="mb-6 sm:mb-8 text-center mt-8 sm:mt-12">
         <div className="flex items-center justify-center mb-4 sm:mb-8">
           <div className="w-8 sm:w-16 h-px bg-black"></div>
           <h3 className="px-2 sm:px-4 text-base sm:text-lg md:text-xl font-extrabold uppercase text-black">
-            Subscription Plan
+            Membership Plan
           </h3>
           <div className="w-8 sm:w-16 h-px bg-black"></div>
         </div>

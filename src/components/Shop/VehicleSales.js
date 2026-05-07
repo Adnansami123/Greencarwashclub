@@ -392,7 +392,7 @@ const sizes = React.useMemo(() => {
     });
   });
 
-  return ["All Sizes", ...Array.from(sizeSet)];
+  return ["All Colors", ...Array.from(sizeSet)];
 }, [products]);
 
   // Dynamic image handling for any product

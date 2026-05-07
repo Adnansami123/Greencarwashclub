@@ -30,10 +30,11 @@ import {
   commonValidator,
 } from "../../utils/validations/commonValidations";
 import { useLoginMutation } from "../../store/ConfigurationAPI/ConfigurationAPI";
-import { Radio } from "antd";
+import { Checkbox, Radio } from "antd";
 import { geteCommerceInvoiceSum } from "../../utils";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
-
+// import image
+import RazorpayImage from "../../assets/images/Qrcodegreesn 1.png";
 export default function CheckoutPage() {
   const BTFSAuthCtx = useContext(AuthContext);
   const { cartItems, setCartItems } = useCart();
@@ -250,6 +251,8 @@ export default function CheckoutPage() {
   // const [isChecked, setIsChecked] = useState(false);
   // const [selectedCOD, setSelectedCOD] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  // state
+  const [showPaymentImage, setShowPaymentImage] = useState(false);
 
   const history = useHistory();
   const location = useLocation();
@@ -559,100 +562,8 @@ export default function CheckoutPage() {
         });
       }
     });
-
-    // setStates((prevState) => ({
-    //   ...prevState,
-    //   isSubmitting: true,
-    // }));
-
-    //  return;
-    // end here...
-
-    // if (!BTFSAuthCtx.isLoggedIn) {
-    //   console.log("Not logged in, redirecting to SignIn");
-    //   // Save current page path to come back after login
-    //   localStorage.setItem("redirectAfterLogin", location.pathname);
-
-    //   // Add a small timeout to show loading state before redirect
-    //   setTimeout(() => {
-    //     history.push("/SignIn");
-    //   }, 300);
-    // } else {
-    //   // Handle the case when user is logged in
-    //   // Simulate form submission
-    //   setTimeout(() => {
-    //     setIsSubmitting(false);
-    //     if (selectedOption) {
-    //       history.push("/PaymentSuccess"); // Navigate to confirmation page
-    //       setCartItems([]);
-    //       // Clear all form fields
-    //       if (formRef.current) {
-    //         formRef.current.reset();
-    //       }
-
-    //       //Clear all checkout related local storage items
-    //       localStorage.removeItem("cartTotal");
-    //       localStorage.removeItem("cartSubtotal");
-    //       localStorage.removeItem("cartTax");
-    //       localStorage.removeItem("cartShipping");
-
-    //       // Reset all state values
-    //       setOrderNotes("");
-    //       setOrderTotal(0);
-    //       setOrderSubtotal(0);
-    //       setOrderTax(0);
-    //       setOrderShipping(0);
-    //       setSelectedOption(false);
-
-    //       alert("Order placed successfully!");
-    //     } else {
-    //       alert("Please Select Payment Option");
-    //     }
-    //   }, 1500);
-    // }
   };
 
-  // useEffect(() => {
-  //   if (states.isChanged === true) {
-  //     commonValidator({
-  //       fields: billingFields(),
-  //       fieldValues: states,
-  //     }).then((r) => {
-  //       if (r === true) {
-  //         setErrors({});
-  //         generateInvoice();
-  //       } else {
-  //         const errVal = {};
-  //         // loop over the errors object & assign respective error msg
-  //         for (const key in r) {
-  //           // Only assign common validation messages & ignore custom ones
-  //           if (
-  //             key !== "amount" &&
-  //             key !== "installmentsNumber" &&
-  //             key !== "CDSLClientID" &&
-  //             key !== "DPID" &&
-  //             key !== "NSDLClientID" &&
-  //             key !== "switchValue" &&
-  //             key !== "switchAmount"
-  //           ) {
-  //             errVal[key] = commonValidationsMsg[key];
-  //           }
-  //         }
-
-  //         setErrors({
-  //           ...r, // For custom validation messages
-  //           ...errVal, // Overwrite non-custom preassigned yup validation messages with common ones
-  //           ...errors, // Overwrite validation messages with existing ones
-  //         });
-  //       }
-  //     });
-
-  //     setStates({
-  //       ...states,
-  //       isChanged: false,
-  //     });
-  //   }
-  // }, [states]);
   const handleInputChangeFirstName = (e) => {
     const { name, value } = e.target;
     const { firstName, ...Err } = errors;
@@ -922,7 +833,19 @@ export default function CheckoutPage() {
       //  isChanged: true,
     });
   };
+  const OnChangeHandlerPayment = (e) => {
+    const checked = e.target.checked;
 
+    setShowPaymentImage(checked);
+
+    setStates((prevState) => ({
+      ...prevState,
+      PaymentTransactions: {
+        ...prevState.PaymentTransactions,
+        PaymentModeXID: checked ? 2 : 0,
+      },
+    }));
+  };
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Header */}
@@ -950,15 +873,15 @@ export default function CheckoutPage() {
           {/* Billing Details */}
           <div className="w-full lg:w-3/5">
             {!!!authCtx.isLoggedIn ? (
-              <div>
-                {/* <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
+              <div className="bg-white rounded-xl shadow-md p-5 sm:p-6 border border-gray-100 mb-6">
+                <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
                   <span className="bg-blue-100 text-blue-600 w-7 h-7 rounded-full inline-flex items-center justify-center mr-3 text-sm">
                     1
                   </span>
                   Login
-                </h2> */}
+                </h2>
 
-                {/* <form onSubmit={handleLoginSubmit}>
+                <form onSubmit={handleLoginSubmit}>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -1005,7 +928,12 @@ export default function CheckoutPage() {
                     </div>
 
                     <div className="flex gap-4 self-start mr-6 mt-6">
-                     
+                      {/* <Link
+                        to="/SignIn"
+                        className="no-underline px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-indigo-700 transition duration-300"
+                      >
+                        Login
+                      </Link> */}
                       <button
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
                         type="Login"
@@ -1048,7 +976,7 @@ export default function CheckoutPage() {
                       </Link>
                     </div>
                   </div>
-                </form> */}
+                </form>
               </div>
             ) : (
               <></>
@@ -1122,19 +1050,6 @@ export default function CheckoutPage() {
                     />
                     <span className="errorMsg">{errors?.email}</span>
                   </div>
-                </div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Vechile Number{" "}
-                    {/* <span className="text-gray-400">(Optional)</span> */}
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white text-black"
-                    value={states.companyName}
-                    onChange={handleInputChangeCompanyName}
-                  />
-                  <span className="errorMsg">{errors?.companyName}</span>
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -1301,26 +1216,6 @@ export default function CheckoutPage() {
                 </div>
               )}
 
-              <div className="border-b border-gray-200">
-                <div className="flex justify-between mt-3">
-                  <span className="font-medium text-blue-600">Shipping</span>
-                  {shipping === 0 ? (
-                    <span className="text-green-600 font-medium">
-                      Free shipping
-                    </span>
-                  ) : (
-                    <span className="text-gray-700">
-                      €{shipping.toFixed(2)}
-                    </span>
-                  )}
-                </div>
-                {subtotal > 500 && (
-                  <p className="text-xs text-gray-500 mt-1">
-                    Free shipping on orders over ₹500
-                  </p>
-                )}
-              </div>
-
               <div className="py-4">
                 <div className="flex justify-between">
                   <span className="font-bold text-lg text-gray-800">Total</span>
@@ -1338,22 +1233,44 @@ export default function CheckoutPage() {
                   </span>
                   Payment Method
                 </h3>
-                <div className="space-y-4 p-4">
-                  <Radio.Group
-                    onChange={OnChangeHandler}
-                    value={states?.PaymentTransactions?.PaymentModeXID}
-                  >
-                    <Radio value={1}>COD</Radio>
-                    <Radio value={2}>Pay Now</Radio>
-                  </Radio.Group>
-                </div>
+                  <div className="space-y-10 p-1">
+                    <Checkbox
+                      checked={showPaymentImage}
+                      onChange={OnChangeHandlerPayment}
+                    >
+                      Pay Now
+                    </Checkbox>
+
+                    {showPaymentImage && (
+                      <div className="mt-15 flex justify-center px-2 sm:px-10">
+                        <img
+                          src={RazorpayImage}
+                          alt="Razorpay"
+                          className="
+        w-full
+        max-w-[600px]
+        sm:max-w-[300px]
+        md:max-w-[380px]
+        lg:max-w-[450px]
+        xl:max-w-[500px]
+        h-auto
+        object-contain
+        rounded-xl
+        shadow-lg
+        transition-all
+        duration-300
+      "
+                        />
+                      </div>
+                    )}
+                  </div>
               </div>
 
               <button
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
                 type="submit"
                 onClick={handleSubmit}
-                disabled={isSubmitting || !!authCtx.isLoggedIn ? false : true}
+                disabled={isSubmitting || !authCtx.isLoggedIn}
               >
                 {isSubmitting ? (
                   <>
@@ -1386,7 +1303,7 @@ export default function CheckoutPage() {
 
               <div className="mt-6 text-sm text-gray-600">
                 <div className="flex items-center mb-3">
-                  <svg
+                  {/* <svg
                     className="w-5 h-5 text-green-500 mr-2"
                     fill="none"
                     stroke="currentColor"
@@ -1399,10 +1316,10 @@ export default function CheckoutPage() {
                       strokeWidth="2"
                       d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                     ></path>
-                  </svg>
-                  <span className="font-medium">Secure Checkout:</span>
+                  </svg> */}
+                  {/* <span className="font-medium">Secure Checkout:</span> */}
                 </div>
-                <p className="text-gray-500 text-sm pl-7">
+                {/* <p className="text-gray-500 text-sm pl-7">
                   Your payment information is encrypted for your security
                 </p>
 
@@ -1424,10 +1341,10 @@ export default function CheckoutPage() {
                       </span>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
-
+            {/* 
             <div className="bg-white rounded-xl shadow-md p-5 sm:p-6 border border-gray-100 mt-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
@@ -1460,12 +1377,42 @@ export default function CheckoutPage() {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
 
-     
+      {/* <footer className="bg-gray-800 text-white py-8 mt-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <p className="text-sm">
+                © 2025 Your Company. All rights reserved.
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6">
+              <a
+                href="#"
+                className="text-sm text-gray-300 hover:text-white transition-colors"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#"
+                className="text-sm text-gray-300 hover:text-white transition-colors"
+              >
+                Terms of Service
+              </a>
+              <a
+                href="#"
+                className="text-sm text-gray-300 hover:text-white transition-colors"
+              >
+                Refund Policy
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer> */}
     </div>
   );
 }

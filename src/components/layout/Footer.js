@@ -29,47 +29,37 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* COMPANY */}
-          <div className="footer-col">
-            <h3>Company</h3>
-            <ul>
-              <li>
-                <a href="/AboutUs">About Us</a>
-              </li>
-            </ul>
-          </div>
-          {/* UPCOMING BRANCHES */}
-          <div className="footer-col branches">
-            <h3>Upcoming Branches</h3>
+       <div className="footer-col branches">
+  <h3>Our Up Coming Branches</h3>
 
-            <div className="branches-grid">
-              <ul>
-                <li>IDPL</li>
-                <li>Begumpet</li>
-                <li>Bharat Nagar</li>
-                <li>Chaitanyapuri</li>
-                <li>Chikkadpally</li>
-                <li>Dilsukhnagar</li>
-              </ul>
+  <div className="branches-grid">
+    <ul>
+      <li>IDPL</li>
+      <li>Begumpet</li>
+      <li>Bharat Nagar</li>
+      <li>Chaitanyapuri</li>
+      <li>Chikkadpally</li>
+      <li>Dilsukhnagar</li>
+    </ul>
 
-              <ul>
-                <li>Hitech City</li>
-                <li>Isnapur</li>
-                <li>Parade Ground</li>
-                <li>Khairatabad</li>
-                <li>Lakdikapul</li>
-              </ul>
-              <ul>
-                <li>Madhapur</li>
-                <li>Malakpet</li>
-                <li>Durgam Cheruvu</li>
-                <li>Erragadda</li>
-                <li>ECIL</li>
-                <li>Habsiguda</li>
-              </ul>
-            </div>
-          </div>
-          {/* SOCIAL */}
+    <ul>
+      <li>Hitech City</li>
+      <li>Isnapur</li>
+      <li>Parade Ground</li>
+      <li>Khairatabad</li>
+      <li>Lakdikapul</li>
+    </ul>
+
+    <ul>
+      <li>Madhapur</li>
+      <li>Malakpet</li>
+      <li>Durgam Cheruvu</li>
+      <li>Erragadda</li>
+      <li>ECIL</li>
+      <li>Habsiguda</li>
+    </ul>
+  </div>
+</div>
           <div className="footer-col">
             <h3>Follow Us</h3>
             <div className="social-icons">
@@ -86,7 +76,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* ✅ FULL WIDTH BOTTOM (FIXED) */}
         <div className="footer-bottom">
           <div className="footer-container bottom-content">
             <p>© {new Date().getFullYear()} Green Car Wash Club</p>

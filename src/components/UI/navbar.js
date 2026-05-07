@@ -377,7 +377,7 @@ export default function Navbar({ onNavClick, setCurrentView }) {
             )}
           </Link>
         </li>
-         <li className="relative group">
+        <li className="relative group">
           <Link
             to="/Subscription"
             onClick={() =>
@@ -387,7 +387,7 @@ export default function Navbar({ onNavClick, setCurrentView }) {
               isActive("/Subscription") ? "font-medium" : ""
             }`}
           >
-            Subscription
+            Membership
             {isActive("/Subscription") && (
               <span className="absolute left-0 -bottom-1 w-full h-[2px]  bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-700 hover:to-purple-700 transition-all duration-300"></span>
             )}
