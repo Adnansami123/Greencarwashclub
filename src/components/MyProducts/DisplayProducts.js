@@ -462,9 +462,19 @@ export const CartItem = ({
 
   return (
     <div
-      className="group relative flex flex-col rounded-2xl overflow-hidden 
-  bg-white border border-green-200 shadow-sm hover:shadow-xl 
-  transition-all duration-300 hover:-translate-y-1"
+      className={`group relative flex flex-col rounded-2xl overflow-hidden
+     shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2
+     border text-white
+     ${
+       index === 0
+         ? // BASIC
+           "bg-gradient-to-br from-lime-300 via-green-400 to-emerald-500 border-lime-200"
+         : index === 1
+           ? // PRIME (Black / Gray Premium)
+             "bg-gradient-to-br from-gray-900 via-gray-700 to-black border-gray-500"
+           : // PRO (Golden Premium)
+             "bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-700 border-yellow-300"
+     }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -483,22 +493,22 @@ export const CartItem = ({
 
       <div className="p-4 flex flex-col items-center text-center gap-2">
         <h3
-          className="font-semibold text-gray-800 hover:text-green-700 truncate cursor-pointer"
+          className="font-semibold text-white text-lg hover:text-green-700 truncate cursor-pointer"
           // onClick={handleViewProduct}
         >
           {itemName}
         </h3>
 
-        <p className="text-sm text-gray-500 truncate">{description}</p>
+        <p className="text-sm text-white/80 truncate">{description}</p>
 
         <div className="flex justify-center text-sm">{renderStars(rating)}</div>
 
         <div className="flex justify-center items-center gap-2">
-          <span className="text-lg font-bold text-green-700">
+          <span className="text-2xl font-bold text-white">
             {formattedPrice}
           </span>
           {formattedOriginalPrice && (
-            <span className="text-sm text-gray-400 line-through">
+            <span className="text-sm text-white/70 line-through">
               {formattedOriginalPrice}
             </span>
           )}
@@ -508,14 +518,14 @@ export const CartItem = ({
           <Button
             type="primary"
             onClick={handleAddToCart}
-            className="flex-1 !bg-green-600 hover:!bg-green-700 text-white rounded-lg"
+            className="flex-1 !bg-white !text-black hover:!bg-gray-200 border-0 rounded-xl font-semibold"
           >
             Subscribe
           </Button>
 
           <Button
             onClick={handleSendWhatsApp}
-            className="flex-1 !bg-green-500 hover:!bg-green-600 text-white rounded-lg flex items-center justify-center gap-2"
+            className="flex-1 !bg-black/20 hover:!bg-black/30 !text-white border border-white/30 rounded-xl flex items-center justify-center gap-2"
           >
             Contact With <FaWhatsapp />
           </Button>
@@ -879,15 +889,15 @@ export default function DisplayProducts() {
       </>
 
       <DisplayVechile products={filteredProducts.slice(0, 3)} />
-      
-            <div className="flex justify-center mt-4">
-  <button
-    className="service-btn"
-    onClick={() => history.push("/VehicleSales")}
-  >
-    All Cars
-  </button>
-</div>
+
+      <div className="flex justify-center mt-4">
+        <button
+          className="service-btn"
+          onClick={() => history.push("/VehicleSales")}
+        >
+          All Cars
+        </button>
+      </div>
       <div className="mb-6 sm:mb-8 text-center mt-8 sm:mt-12">
         <div className="flex items-center justify-center mb-4 sm:mb-8">
           <div className="w-8 sm:w-16 h-px bg-black"></div>

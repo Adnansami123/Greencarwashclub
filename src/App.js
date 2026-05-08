@@ -115,183 +115,120 @@ const App = () => {
         : img,
   );
 
-  return (
-    <div>
+   const [timeLeft, setTimeLeft] = useState({});
+    const [launchCompleted, setLaunchCompleted] = useState(false);
+  
+    // ⏰ Launch Time (Today 4:15 PM)
+    const launchTime = new Date();
+    launchTime.setHours(16, 30, 0, 0);
+  
+    useEffect(() => {
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = launchTime.getTime() - now;
+  
+        if (distance <= 0) {
+          clearInterval(timer);
+          setLaunchCompleted(true);
+  
+          window.close();
+  
+          return;
+        }
+  
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+  
+        const minutes = Math.floor(
+          (distance % (1000 * 60 * 60)) / (1000 * 60)
+        );
+  
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+        setTimeLeft({
+          hours,
+          minutes,
+          seconds,
+        });
+      }, 1000);
+  
+      return () => clearInterval(timer);
+    }, []);
+
+ return (
+  <>
+    {!launchCompleted ? (
+      <div className="flex items-center justify-center h-screen bg-black text-white">
+        <div className="text-center">
+          <h1 className="text-5xl font-bold mb-6">
+            Website Launching at 4:25 PM
+          </h1>
+
+          <div className="flex gap-6 justify-center">
+            <div className="bg-white/10 px-6 py-4 rounded-2xl">
+              <h2 className="text-4xl font-bold">
+                {String(timeLeft.hours || 0).padStart(2, "0")}
+              </h2>
+              <p>Hours</p>
+            </div>
+
+            <div className="bg-white/10 px-6 py-4 rounded-2xl">
+              <h2 className="text-4xl font-bold">
+                {String(timeLeft.minutes || 0).padStart(2, "0")}
+              </h2>
+              <p>Minutes</p>
+            </div>
+
+            <div className="bg-white/10 px-6 py-4 rounded-2xl">
+              <h2 className="text-4xl font-bold">
+                {String(timeLeft.seconds || 0).padStart(2, "0")}
+              </h2>
+              <p>Seconds</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : (
       <ConfigProvider
         theme={{
           token: {
-            // 🎨 Colors
             colorPrimary: "#d82929",
-            colorSuccess: "#52c41a",
-            colorWarning: "#faad14",
-            colorError: "#ff4d4f",
-            colorInfo: "#1677ff",
-
-            // 🔤 Typography
-            fontSize: 14,
-            fontFamily: "'Segoe UI', sans-serif",
-            fontWeightStrong: 600,
-
-            // 📦 Layout / spacing
-            borderRadius: 8,
-            padding: 16,
-            margin: 16,
-
-            // 🖌 Border & shadows
-            borderColor: "#d9d9d9",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-
-            // 🏷 Other UI tokens
-            lineHeight: 1.6,
-            controlHeight: 40, // default height of inputs/buttons
-          },
-
-          components: {
-            Card: {
-              headerPadding: "2px", // header area
-              paddingLG: 8, // large padding size
-              paddingSM: 4, // small padding size
-            },
-            Button: {
-              colorPrimary: "#ff221e", // override primary button color
-              colorPrimaryHover: "#f46721",
-              colorPrimaryActive: "#d9363e",
-              borderRadius: 12,
-              controlHeight: 44,
-            },
-            Input: {
-              borderRadius: 6,
-              colorBorder: "#999",
-              colorBgContainer: "#FFFFFF",
-            },
-            Table: {
-              // 📦 Table Layout
-              cellPaddingBlock: 4, // vertical padding in cells
-              cellPaddingInline: 8, // horizontal padding in cells
-              cellFontSize: 14,
-              borderRadius: 6, // border radius for table wrapper
-
-              // 🎨 Header styles
-              headerBg: "#1767df", // header background
-              headerColor: "#ffffff", // header text color
-              headerBorderRadius: 0, // radius for header cells
-              headerSplitColor: "#d9d9d9", // border between header cells
-
-              // 🎨 Body styles
-              rowHoverBg: "#1d95cc", // background on hover
-              rowSelectedBg: "#e6f7ff", // background for selected row
-              rowSelectedHoverBg: "#bae7ff", // selected + hover
-
-              // 📏 Borders & Lines
-              borderColor: "#d31717", // cell border color
-              borderColorHorizontal: "#d31717",
-              borderColorVertical: "#d31717",
-
-              // 🖌 Striped Table
-              bodySortBg: "#fafafa", // background when sorting
-              headerSortBg: "#f0f0f0", // header bg when sorting
-              headerSortHoverBg: "#e6f7ff", // header bg when sorting + hover
-
-              // 🔍 Expanded row
-              expandedRowBg: "#fafafa",
-
-              // 📑 Pagination (inside table footer)
-              colorText: "#333333",
-              colorTextHeading: "#555555",
-              colorTextSecondary: "#888888",
-
-              // 🏷 Sticky header
-              stickyScrollBarBg: "#ccc",
-              stickyScrollBarBorderRadius: 4,
-
-              // 🖤 Disabled state
-              colorTextDisabled: "#999999",
-            },
           },
         }}
       >
-        {/* <LoadingModal
-          isVisible={loadingModalCofiguration.isVisible}
-          loadingText={loadingModalCofiguration.loadingText}
-        ></LoadingModal> */}
-        <div>
-          <NewAssetProvider>
-            <NewProductProvider>
-              <WishlistProvider>
-                <CartProvider>
-                  <CompareProvider>
-                    <Layout>
-                      <Navbar />
-                      {/* {!!authCtx.token &&
-                      !["products", "payments", "paymentsuccess"].includes(
-                        pathname.toLowerCase()
-                      ) && (
-                        <Sider trigger={null} collapsible collapsed={collapsed}>
-                          {!!collapsed == false ? (
-                            <img
-                              src={imgPath}
-                              height={!!collapsed ? "31" : "50"}
-                              width={!!collapsed ? "16" : "230"}
-                            ></img>
-                          ) : (
-                            <img
-                              src={imgPath}
-                              height={!!collapsed ? "31" : "50"}
-                              width={!!collapsed ? "80" : "230"}
-                            ></img>
-                          )}
+        <NewAssetProvider>
+          <NewProductProvider>
+            <WishlistProvider>
+              <CartProvider>
+                <CompareProvider>
+                  <Layout>
+                    <Navbar />
 
-                          <TopHeader
-                            name={!!pathname === true ? pathname : "dashboard"}
-                          ></TopHeader>
-                        </Sider>
-                      )} */}
-                      <Layout className="site-layout">
-                        <Header
-                          className="site-layout-background hidden"
-                          style={{ padding: 0 }}
-                        >
-                          {!!authCtx.token ? (
-                            React.createElement(
-                              collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-                              {
-                                className: "trigger",
-                                onClick: () => setCollapsed(!collapsed),
-                              },
-                            )
-                          ) : (
-                            <img src={imgPath} alt="Logo" />
-                          )}
+                    <Layout className="site-layout">
+                      <Content
+                        className="site-layout-background"
+                        style={{
+                          margin: 0,
+                          padding: 0,
+                          width: "100%",
+                        }}
+                      >
+                        <RoutesDetails />
+                      </Content>
 
-                          <div style={{ float: "right" }}>
-                            <ProfileHeader />
-                          </div>
-                        </Header>
-
-                        <Content
-                          className="site-layout-background"
-                          style={{
-                            margin: 0,
-                            padding: 0,
-                            width: "100%",
-                          }}
-                        >
-                          <RoutesDetails />
-                        </Content>
-
-                        {/* ✅ DIRECT FOOTER (NO ANT WRAPPER) */}
-                        <FooterSection />
-                      </Layout>
+                      <FooterSection />
                     </Layout>
-                  </CompareProvider>
-                </CartProvider>
-              </WishlistProvider>
-            </NewProductProvider>
-          </NewAssetProvider>
-        </div>
+                  </Layout>
+                </CompareProvider>
+              </CartProvider>
+            </WishlistProvider>
+          </NewProductProvider>
+        </NewAssetProvider>
       </ConfigProvider>
-    </div>
-  );
+    )}
+  </>
+);
 };
 
 export default App;
