@@ -99,7 +99,6 @@ export default function Navbar({ onNavClick, setCurrentView }) {
 
   return (
     <nav className="sticky top-0 bg-white flex justify-between items-center md:px-14 px-6 py-4 cursor-pointer relative z-50">
-      {/* Logo Section */}
       <div className="flex items-center gap-2">
         <Link
           className="flex gap-2 items-center text-black no-underline"
@@ -107,114 +106,91 @@ export default function Navbar({ onNavClick, setCurrentView }) {
           onClick={() => handleNavigation("/", "Home", "cart")}
         >
           <img src={Logo} alt="Logo" className="h-12" />
-          {/* <div className="font-bold text-2xl no-underline" style={{ fontFamily: 'Times New Roman', color: 'red' , textDecoration: 'none'}}>
-          Vijaya Sarees
-           </div> */}
         </Link>
       </div>
 
-      {/* Dropdown for Icons in Mobile Menu */}
       <div className="lg:hidden relative z-50">
         {showIcons && (
-          <div className="absolute left-0 sm:left-40 md:left-52 top-full mt-14 sm:mt-14 shadow-md w-full flex flex-row flex-wrap rounded-lg px-12 py-6 bg-gradient-to-r from-purple-100 via-blue-200 to-indigo-200">
-            <div className="flex flex-col gap-3 mr-12 -translate-x-8">
-              <Link
-                to="/wishlist"
-                className="text-black"
-                onClick={() => {
-                  setShowIcons(false);
-                }}
-              >
-                <div className="flex items-center gap-1">
-                  <img src={Wishlist_icon} className="w-6 h-6" alt="Wishlist" />
-                  <span>({wishlistCount})</span>
-                </div>
-              </Link>
-              <Link
-                to="/CartPage"
-                className="text-black"
-                onClick={() => {
-                  setShowIcons(false);
-                }}
-              >
-                <div className="flex items-center gap-1">
-                  <img src={Shopping_cart} className="w-6 h-6" alt="Cart" />
-                  <span>({cartCount})</span>
-                </div>
-              </Link>
-              <Link to="/ComparePage" className="text-black">
-                {/* Compare Icon */}
-                <div className="flex items-center gap-1">
-                  <img src={Compare} className="w-6 h-6" alt="Compare" />
-                  <span>({compareCount})</span>
-                </div>
-              </Link>
-              <div className="relative inline-block" ref={dropdownRef}>
-                {/* The icon that triggers the dropdown */}
-                {LoginRegister ? (
-                  <img
-                    src={LoginRegister}
-                    className="w-7 h-7 cursor-pointer"
-                    alt="Login/Register"
-                    onClick={toggleDropdown}
-                  />
-                ) : (
-                  <UserCircle
-                    className="w-6 h-6 cursor-pointer text-gray-700"
-                    onClick={toggleDropdown}
-                  />
-                )}
+          <div className="absolute left-1/2 -translate-x-1/2 mt-3 w-[210px] rounded-2xl px-3 py-2 bg-gradient-to-br from-white via-blue-50 to-indigo-100 shadow-[0_6px_20px_rgba(0,0,0,0.12)] border border-white/30 backdrop-blur-md">
+            {" "}
+            <div className="flex flex-col gap-2">
+              {!BTFSAuthCtx.isLoggedIn ? (
+                <>
+                  {/* Login */}
+                  <button
+                    onClick={() => {
+                      history.push("/SignIn");
+                      setShowIcons(false);
+                    }}
+                    className="w-full px-4 py-2 rounded-xl text-sm text-gray-700 hover:bg-blue-100 flex items-center transition-all duration-200"
+                  >
+                    <LogIn className="w-5 h-5 mr-3 text-blue-500" />
+                    <span>Login</span>
+                  </button>
 
-                {/* Dropdown menu */}
-                {isOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 overflow-hidden">
-                    {/* Dropdown arrow */}
-                    <div className="absolute top-0 right-2 -mt-2 w-3 h-3 bg-white transform rotate-45"></div>
+                  {/* Register */}
+                  <button
+                    onClick={() => {
+                      history.push("/Register");
+                      setShowIcons(false);
+                    }}
+                    className="w-full px-4 py-2 rounded-xl text-sm text-gray-700 hover:bg-green-100 flex items-center transition-all duration-200"
+                  >
+                    <UserPlus className="w-5 h-5 mr-3 text-green-500" />
+                    <span>Register</span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  {/* Profile */}
+                  <button
+                    onClick={() => {
+                      history.push("/profile");
+                      setShowIcons(false);
+                    }}
+                    className="w-full px-4 py-2 rounded-xl text-sm text-gray-700 hover:bg-indigo-100 flex items-center transition-all duration-200"
+                  >
+                    <UserCircle className="w-5 h-5 mr-3 text-indigo-500" />
+                    <span>Profile</span>
+                  </button>
 
-                    {/* Menu items with hover effect */}
-                    <div className="relative z-10">
-                      {/* Login option */}
-                      <a
-                        href="/SignIn"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 flex items-center group transition-all duration-200"
-                      >
-                        <LogIn className="w-4 h-4 mr-3 text-blue-500 group-hover:text-blue-600" />
-                        <span className="group-hover:translate-x-1 transition-transform duration-200">
-                          Login
-                        </span>
-                      </a>
+                  {/* Order History */}
+                  <button
+                    onClick={() => {
+                      history.push("/OrderList");
+                      setShowIcons(false);
+                    }}
+                    className="w-full px-4 py-2 rounded-xl text-sm text-gray-700 hover:bg-blue-100 flex items-center transition-all duration-200"
+                  >
+                    <ClipboardList className="w-5 h-5 mr-3 text-blue-500" />
+                    <span>Order History</span>
+                  </button>
 
-                      {/* Register option */}
-                      <a
-                        href="/Register"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 flex items-center group transition-all duration-200"
-                      >
-                        <UserPlus className="w-4 h-4 mr-3 text-green-500 group-hover:text-green-600" />
-                        <span className="group-hover:translate-x-1 transition-transform duration-200">
-                          Register
-                        </span>
-                      </a>
+                  {/* Change Password */}
+                  <button
+                    onClick={() => {
+                      history.push("/ChangePassword");
+                      setShowIcons(false);
+                    }}
+                    className="w-full px-3 py-2 rounded-xl text-sm text-gray-700 hover:bg-yellow-100 flex items-center whitespace-nowrap transition-all duration-200"
+                  >
+                    <UserCircle className="w-4 h-4 mr-2 text-yellow-500 flex-shrink-0" />{" "}
+                    <span>Change Password</span>
+                  </button>
 
-                      {/* Divider */}
-                      <div className="border-t border-gray-100 my-1"></div>
-
-                      {/* Logout option */}
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 flex items-center group transition-all duration-200"
-                      >
-                        <LogOut
-                          className="w-4 h-4 mr-3 text-red-500 group-hover:text-red-600"
-                          onClick={onClickLogout}
-                        />
-                        <span className="group-hover:translate-x-1 transition-transform duration-200">
-                          Logout
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                )}
-              </div>
+                  {/* Logout */}
+                  <button
+                    onClick={() => {
+                      onClickLogout();
+                      setShowIcons(false);
+                    }}
+                    className="w-full px-4 py-2 rounded-xl text-sm text-gray-700 hover:bg-red-100 flex items-center transition-all duration-200"
+                  >
+                    <LogOut className="w-5 h-5 mr-3 text-red-500" />
+                    <span>Logout</span>
+                  </button>
+                </>
+              )}
             </div>
           </div>
         )}
@@ -264,25 +240,6 @@ export default function Navbar({ onNavClick, setCurrentView }) {
             )}
           </Link>
         </li>
-        {/* <li className="relative group">
-          <Link
-            to="/Shop"
-            onClick={(e) => {
-              console.log("Shop link clicked");
-              handleNavigation("/Shop", "Home > Shop", "shop");
-            }}
-            className={`inline-block relative text-black text-decoration-none ${isActive("/Shop") ? "font-medium" : ""
-              }`}
-          >
-            Shop
-            {isActive("/Shop") && (
-              <span className="absolute left-0 -bottom-1 w-full h-[2px]  bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-700 hover:to-purple-700 transition-all duration-300"></span>
-            )}
-            {!isActive("/Shop") && (
-              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-500 ease-in-out group-hover:w-full"></span>
-            )}
-          </Link>
-        </li> */}
         <li className="relative group">
           <Link
             to="/AboutUs"
@@ -399,13 +356,7 @@ export default function Navbar({ onNavClick, setCurrentView }) {
       </ul>
       {/* Desktop Icons */}
       <div className="hidden lg:flex gap-4 items-center">
-        <div
-          className="text-md font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 drop-shadow-sm tracking-wide hover:scale-150 transition-all duration-[3000ms] border-[1px] p-1 border-transparent rounded-lg"
-          style={{
-            borderImage:
-              "linear-gradient(to right, #a855f7, #3b82f6, #6366f1) 1",
-          }}
-        >
+        <div className="text-md font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 drop-shadow-sm tracking-wide hover:scale-150 transition-all duration-[3000ms] border-[1px] p-1 border-transparent rounded-lg">
           {BTFSAuthCtx.userName || "Guest"}
         </div>
 
@@ -428,7 +379,6 @@ export default function Navbar({ onNavClick, setCurrentView }) {
           {/* Dropdown menu */}
           {isOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 overflow-hidden">
-              {/* Dropdown arrow */}
               <div className="absolute top-0 right-2 -mt-2 w-3 h-3 bg-white transform rotate-45"></div>
 
               {/* Menu items with hover effect */}
@@ -468,29 +418,13 @@ export default function Navbar({ onNavClick, setCurrentView }) {
                         Profile
                       </Button>
                     </p>
-                    <p>
-                      <Button
-                        onClick={() =>
-                          onClickDownloadImage({ key: "OrderList" })
-                        }
-                        type="link"
-                      >
-                        <ClipboardList className="w-4 h-4 mr-3 text-blue-500 group-hover:text-blue-600" />
-                        <span className="group-hover:translate-x-1 transition-transform duration-200">
-                          Order History
-                        </span>
-                      </Button>
-                    </p>
-                    {/* <a
-                      href="/OrderList"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 flex items-center group transition-all duration-200"
+                    <button
+                      onClick={() => history.push("/OrderList")}
+                      className="w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 flex items-center transition-all duration-200"
                     >
-                      <ClipboardList className="w-4 h-4 mr-3 text-blue-500 group-hover:text-blue-600" />
-                      <span className="group-hover:translate-x-1 transition-transform duration-200">
-                        
-                      </span>
-                    </a> */}
-
+                      <ClipboardList className="w-4 h-4 mr-3 text-blue-500" />
+                      <span>Order History</span>
+                    </button>
                     <p>
                       <Button
                         onClick={() =>
@@ -522,35 +456,6 @@ export default function Navbar({ onNavClick, setCurrentView }) {
             </div>
           )}
         </div>
-
-        {/* Compare Icon - FIXED */}
-        {/* <div className="relative">
-          <Link
-            to="/ComparePage"
-            onClick={() =>
-              handleNavigation("/ComparePage", "Home > Compare", "compare")
-            }
-          >
-            <img src={Compare} className="w-6 h-6" alt="Compare" />
-          </Link>
-          {compareCount > 0 && (
-            <span className="absolute -right-1 -top-1 bg-black p-1 w-4 h-4 text-white text-[10px] rounded-full flex items-center justify-center text-center">
-              {compareCount}
-            </span>
-          )}
-        </div> */}
-
-        {/* Wishlist Icon */}
-        {/* <div className="relative">
-          <Link to="/Wishlist">
-            <img src={Wishlist_icon} className="w-6 h-6" alt="Wishlist" />
-          </Link>
-          {wishlistCount > 0 && (
-            <span className="absolute -right-1 -top-1 bg-black p-1 w-4 h-4 text-white text-[10px] rounded-full flex items-center justify-center text-center">
-              {wishlistCount}
-            </span>
-          )}
-        </div> */}
 
         {/* Shopping Cart Icon */}
         <div className="relative">
