@@ -115,81 +115,10 @@ const App = () => {
         : img,
   );
 
-   const [timeLeft, setTimeLeft] = useState({});
-    const [launchCompleted, setLaunchCompleted] = useState(false);
   
-    // ⏰ Launch Time (Today 4:15 PM)
-    const launchTime = new Date();
-    launchTime.setHours(16, 30, 0, 0);
-  
-    useEffect(() => {
-      const timer = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = launchTime.getTime() - now;
-  
-        if (distance <= 0) {
-          clearInterval(timer);
-          setLaunchCompleted(true);
-  
-          window.close();
-  
-          return;
-        }
-  
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-  
-        const minutes = Math.floor(
-          (distance % (1000 * 60 * 60)) / (1000 * 60)
-        );
-  
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  
-        setTimeLeft({
-          hours,
-          minutes,
-          seconds,
-        });
-      }, 1000);
-  
-      return () => clearInterval(timer);
-    }, []);
-
  return (
   <>
-    {!launchCompleted ? (
-      <div className="flex items-center justify-center h-screen bg-black text-white">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold mb-6">
-            Website Launching at 4:25 PM
-          </h1>
-
-          <div className="flex gap-6 justify-center">
-            <div className="bg-white/10 px-6 py-4 rounded-2xl">
-              <h2 className="text-4xl font-bold">
-                {String(timeLeft.hours || 0).padStart(2, "0")}
-              </h2>
-              <p>Hours</p>
-            </div>
-
-            <div className="bg-white/10 px-6 py-4 rounded-2xl">
-              <h2 className="text-4xl font-bold">
-                {String(timeLeft.minutes || 0).padStart(2, "0")}
-              </h2>
-              <p>Minutes</p>
-            </div>
-
-            <div className="bg-white/10 px-6 py-4 rounded-2xl">
-              <h2 className="text-4xl font-bold">
-                {String(timeLeft.seconds || 0).padStart(2, "0")}
-              </h2>
-              <p>Seconds</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    ) : (
+     
       <ConfigProvider
         theme={{
           token: {
@@ -226,7 +155,7 @@ const App = () => {
           </NewProductProvider>
         </NewAssetProvider>
       </ConfigProvider>
-    )}
+  
   </>
 );
 };
