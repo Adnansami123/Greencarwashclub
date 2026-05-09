@@ -23,14 +23,17 @@ import {
   useGetUserCompanyByBrandAndUserMutation,
   usePostOrderMutation,
 } from "../../store/eCommerceAPI/eCommerceAPI";
-import { useCountriesMutation } from "../../store/BranchesAPI/BranchesAPI";
+import {
+  useBranchByCountryIDMutation,
+  useCountriesMutation,
+} from "../../store/BranchesAPI/BranchesAPI";
 import { string } from "yup";
 import {
   commonValidationsMsg,
   commonValidator,
 } from "../../utils/validations/commonValidations";
 import { useLoginMutation } from "../../store/ConfigurationAPI/ConfigurationAPI";
-import { Checkbox, Radio } from "antd";
+import { Checkbox, Form, Radio, Select } from "antd";
 import { geteCommerceInvoiceSum } from "../../utils";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 // import image
@@ -846,6 +849,13 @@ export default function CheckoutPage() {
       },
     }));
   };
+  const [
+    fetcharea, // the trigger function
+    { data: branches, isLoading, isSuccess },
+  ] = useBranchByCountryIDMutation();
+  useEffect(() => {
+    fetcharea({ countryid: 4 });
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Header */}
@@ -1095,20 +1105,24 @@ export default function CheckoutPage() {
                   </select>
                   <span className="errorMsg">{errors?.country}</span>
                 </div>
-
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     State <span className="text-red-500">*</span>
                   </label>
-                  <select
-                    required
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white text-black"
-                    value={states.state}
+
+                  <Select
+                    placeholder="Select State"
+                    showSearch
+                    optionFilterProp="children"
+                    className="w-full"
+                    allowClear
                   >
-                    <option key={1} value={1}>
-                      Others
-                    </option>
-                  </select>
+                    {branches?.map((branch) => (
+                      <Select.Option key={branch.pid} value={branch.pid}>
+                        {branch.nameAra}
+                      </Select.Option>
+                    ))}
+                  </Select>
                 </div>
 
                 <div className="mb-4">
